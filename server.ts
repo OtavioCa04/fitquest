@@ -54,6 +54,6 @@ async function startServer() {
 }
 
 startServer().catch((error) => {
-  console.error("Erro ao iniciar o servidor:", error.message);
+  console.error("Erro ao iniciar o servidor:", error);
   process.exit(1);
 });
