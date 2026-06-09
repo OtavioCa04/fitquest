@@ -1,0 +1,49 @@
+CREATE DATABASE IF NOT EXISTS fitquest CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+USE fitquest;
+
+CREATE TABLE IF NOT EXISTS users (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  name VARCHAR(120) NOT NULL,
+  username VARCHAR(80) NOT NULL UNIQUE,
+  email VARCHAR(160) NOT NULL UNIQUE,
+  password_hash VARCHAR(255) NOT NULL,
+  phone VARCHAR(40) DEFAULT '',
+  bio TEXT,
+  avatar_data LONGTEXT,
+  xp INT NOT NULL DEFAULT 0,
+  level INT NOT NULL DEFAULT 1,
+  streak INT NOT NULL DEFAULT 0,
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+CREATE TABLE IF NOT EXISTS workouts (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  user_id INT NOT NULL,
+  type VARCHAR(120) NOT NULL,
+  date DATE NOT NULL,
+  start_time TIME NOT NULL,
+  end_time TIME NOT NULL,
+  intensity ENUM('Leve', 'Moderado', 'Intenso') NOT NULL DEFAULT 'Moderado',
+  detail VARCHAR(160) NOT NULL,
+  xp INT NOT NULL DEFAULT 50,
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  CONSTRAINT fk_workouts_user FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+CREATE TABLE IF NOT EXISTS sessions (
+  token CHAR(36) PRIMARY KEY,
+  user_id INT NOT NULL,
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  CONSTRAINT fk_sessions_user FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+CREATE TABLE IF NOT EXISTS daily_mission_rewards (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  user_id INT NOT NULL,
+  mission_id VARCHAR(80) NOT NULL,
+  reward_date DATE NOT NULL,
+  xp INT NOT NULL,
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  UNIQUE KEY uq_daily_mission_reward (user_id, mission_id, reward_date),
+  CONSTRAINT fk_daily_mission_rewards_user FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;

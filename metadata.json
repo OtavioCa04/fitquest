@@ -1,0 +1,6 @@
+{
+  "name": "FitQuest",
+  "description": "A gamified fitness application to track workouts, achievements, and missions.",
+  "requestFramePermissions": [],
+  "majorCapabilities": []
+}

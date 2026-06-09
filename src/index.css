@@ -1,0 +1,26 @@
+@import url('https://fonts.googleapis.com/css2?family=Lexend:wght@400;500;600;700;800&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --color-primary-container: #00e676;
+  --color-surface-container: #201f22;
+  --color-surface-variant: #353437;
+  --color-primary: #75ff9e;
+  --color-background: #131315;
+  --font-lexend: "Lexend", sans-serif;
+}
+
+body {
+  background-color: #0e0e10;
+  color: #e5e1e4;
+  font-family: var(--font-lexend);
+  -webkit-font-smoothing: antialiased;
+}
+
+.neon-glow {
+  box-shadow: 0 0 15px rgba(0, 230, 118, 0.3);
+}
+
+.xp-lightning {
+  filter: drop-shadow(0 0 4px rgba(255, 215, 0, 0.5));
+}
