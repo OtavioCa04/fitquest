@@ -383,16 +383,6 @@ function AuthScreen({
               placeholder="********"
             />
           )}
-          {mode === "login" && (
-            <button className="text-sm font-black uppercase tracking-widest text-[#b8c2ba]">
-              Esqueci minha senha
-            </button>
-          )}
-          {error && (
-            <p className="rounded-2xl border border-red-500/30 bg-red-500/10 p-4 text-sm text-red-100">
-              {error}
-            </p>
-          )}
           <Button onClick={submit} disabled={loading}>
             {loading
               ? "AGUARDE..."
